@@ -1,0 +1,163 @@
+# Group inheritance
+#
+# Any inherited groups prefixed with a g: are global groups
+# and are inherited from the GlobalGroups.yml.
+#
+# Groups without the g: prefix are groups local to this world
+# and are defined in the this groups.yml file.
+#
+# Local group inheritances define your promotion tree when using 'manpromote/mandemote'
+
+groups:
+  dunce:
+    default: false
+    permissions:
+    - dunce.is
+    info:
+      prefix: '&r&7[&0Dunce&7]&r'
+      build: true
+      suffix: ''
+  member:
+    default: true
+    permissions:
+    - factions.kit.fullplayer
+    - essentials.sethome.multiple
+    - essentials.sethome.multiple.default
+    - essentials.skull
+    - essentials.skull.modify
+    - essentials.kit.Basic
+    - essentials.warps.wild
+    - essentials.warps.Spawn
+    - essentials.warps.nether
+    - essentials.warps.creative
+    - essentials.signs.use
+    - dunce.bypass
+    - essentials.signs.use.*
+    - plotme.use
+    - plotme.limit.1
+    inheritance:
+    - g:groupmanager_default
+    - g:bukkit_default
+    - g:essentials_default
+    - g:essentials_builder
+    - g:towny_builder
+    info:
+      prefix: '&r&7[&2Member&7]&r'
+      build: true
+      suffix: ''
+  helper:
+    default: false
+    permissions:
+    - essentials.fly
+    - minecraft.command.toggledownfall
+    - essentials.kick
+    - essentials.mute
+    - essentials.sethome.multiple.helper
+    - essentials.fly.safelogin
+    - essentials.skull.spawn
+    - essentials.skull.others
+    - essentials.workbench
+    - essentials.afk.kickexempt
+    - essentials.nick
+    - essentials.chat.color
+    - essentials.chat.format
+    - essentials.chat.magic
+    - backpack.open.self
+    inheritance:
+    - member
+    info:
+      prefix: '&r&7[&eHelper&7]&r'
+      build: true
+      suffix: ''
+  donor:
+    default: false
+    permissions:
+    - -essentials.kick
+    - -essentials.mute
+    - essentials.sethome.multiple.donor
+    - essentials.feed
+    - essentials.firework
+    - essentials.hat
+    - essentials.speed
+    - essentials.nick.color
+    - essentials.nick.format
+    - essentials.spawner
+    - essentials.spawner.zombie
+    - essentials.spawner.skeleton
+    - essentials.spawner.spider
+    - essentials.spawner.cavespider
+    - plotme.limit.2
+    - jumpboost.have
+    inheritance:
+    - helper
+    info:
+      prefix: '&r&7[&2Donor&r&7]&r'
+      build: true
+      suffix: ''
+  donor2:
+    default: false
+    permissions:
+    - plotme.limit.3
+    inheritance:
+    - donor
+    info:
+      prefix: '&r&7[&aDonor+&r&7]&r'
+      build: true
+      suffix: ''
+  moderator:
+    default: false
+    permissions:
+    - essentials.sethome.multiple.mod
+    - backpack.open.others
+    inheritance:
+    - helper
+    - g:groupmanager_moderator
+    - g:bukkit_moderator
+    - g:essentials_moderator
+    - g:vanish_moderator
+    - plotme.limit.2
+    info:
+      prefix: '&r&7[&4Mod&r&7]&r'
+      build: true
+      suffix: ''
+  admin:
+    default: false
+    permissions:
+    - factions.admin
+    inheritance:
+    - moderator
+    - g:groupmanager_admin
+    - g:bukkit_admin
+    - g:essentials_admin
+    - g:vanish_admin
+    - plotme.admin
+    - backpack.edit
+    - backpack.sign
+    info:
+      prefix: '&r&7[&6Admin&r&7]&r'
+      build: true
+      suffix: ''
+  headadmin:
+    default: false
+    permissions:
+    - '*'
+    - -vanish.effects.*
+    - +vanish.effects.toggle.all
+    inheritance:
+    - admin
+    info:
+      prefix: '&r&7[&dDev&r&7]&r'
+      build: true
+      suffix: '&4'
+  owner:
+    default: false
+    permissions:
+    - '*'
+    - -vanish.effects.*
+    - +vanish.effects.toggle.all
+    inheritance:
+    - admin
+    info:
+      prefix: '&r&7[&3Owner&r&7]&r'
+      build: true
+      suffix: '&f'

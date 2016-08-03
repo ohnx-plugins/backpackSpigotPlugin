@@ -1,0 +1,5 @@
+# triggers
+triggers:
+     - "create a faction": "Try running &a/f create <name>&r to create a faction."
+     - "where can build": "Try running &a/rtp&r to the wild, where you can build."
+     - "staff online now": "Try running &a/list&r to see the list of players online."

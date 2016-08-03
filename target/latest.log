@@ -1,0 +1,305 @@
+[15:30:52] [Server thread/INFO]: Starting minecraft server version 1.8.3
+[15:30:52] [Server thread/INFO]: Loading properties
+[15:30:52] [Server thread/INFO]: Default game type: SURVIVAL
+[15:30:52] [Server thread/INFO]: Generating keypair
+[15:30:52] [Server thread/INFO]: Starting Minecraft server on 167.114.137.137:25565
+[15:30:52] [Server thread/INFO]: Using default channel type
+[15:30:53] [Server thread/INFO]: This server is running CraftBukkit version git-Bukkit-0a645a2 (MC: 1.8.3) (Implementing API version 1.8.3-R0.1-SNAPSHOT)
+[15:30:53] [Server thread/ERROR]: Ambiguous plugin name `WorldEdit' for files `plugins\worldedit.jar' and `plugins\worldedit-bukkit-6.0 (1).jar' in `plugins'
+[15:30:54] [Server thread/INFO]: [cWorldManager] Loading cWorldManager v0.0.1
+[15:30:54] [Server thread/INFO]: [multiInv] Loading multiInv v0.0.1
+[15:30:54] [Server thread/INFO]: [WorldEdit] Loading WorldEdit v6.0;3342-78f975b9
+[15:30:54] [Server thread/INFO]: [HealthBar] Loading HealthBar v1.8.2
+[15:30:54] [Server thread/INFO]: [mcjobs] Loading mcjobs v3.1.8
+[15:30:54] [Server thread/INFO]: [Essentials] Loading Essentials vTeamCity
+[15:30:54] [Server thread/INFO]: [GroupManager] Loading GroupManager v2.0 (Phoenix)
+[15:30:54] [Server thread/INFO]: [PlugMan] Loading PlugMan v2.0.4
+[15:30:54] [Server thread/INFO]: [Chairs] Loading Chairs v4.6
+[15:30:54] [Server thread/INFO]: [Votifier] Loading Votifier v1.9
+[15:30:54] [Server thread/INFO]: [ProtocolLib] Loading ProtocolLib v3.6.3-SNAPSHOT-b132
+[15:30:54] [Server thread/INFO]: [WorldGuard] Loading WorldGuard v5.9
+[15:30:54] [Server thread/INFO]: [betterMe] Loading betterMe v1
+[15:30:54] [Server thread/INFO]: [dieRain] Loading dieRain v0.0.1
+[15:30:54] [Server thread/INFO]: [dunce] Loading dunce v1
+[15:30:54] [Server thread/INFO]: [EssentialsChat] Loading EssentialsChat vTeamCity
+[15:30:54] [Server thread/INFO]: [jumpBoost] Loading jumpBoost v1
+[15:30:54] [Server thread/INFO]: [iConomy] Loading iConomy v7.0
+[15:30:54] [Server thread/INFO]: [sirNeedsOp] Loading sirNeedsOp v1
+[15:30:54] [Server thread/INFO]: [backpack] Loading backpack v1.0.0
+[15:30:54] [Server thread/INFO]: [mcMMO] Loading mcMMO v1.5.00-b3547
+[15:30:54] [Server thread/INFO]: [SimpleVoteListener] Loading SimpleVoteListener v2.6
+[15:30:54] [Server thread/INFO]: [Vault] Loading Vault v1.5.3-b37
+[15:30:54] [Server thread/INFO]: [EssentialsSpawn] Loading EssentialsSpawn vTeamCity
+[15:30:54] [Server thread/INFO]: [MassiveCore] Loading MassiveCore v2.7.5
+[15:30:54] [Server thread/INFO]: [EnjinMinecraftPlugin] Loading EnjinMinecraftPlugin v2.7.2
+[15:30:54] [Server thread/INFO]: [dynmap] Loading dynmap v2.1-SNAPSHOT-1091
+[15:30:54] [Server thread/INFO]: [dynmap] version=git-Bukkit-0a645a2 (MC: 1.8.3)
+[15:30:54] [Server thread/INFO]: [dynmap] inhabitedTicks field not found - inhabited shader not functional
+[15:30:54] [Server thread/INFO]: [dynmap] Mod Support API available
+[15:30:54] [Server thread/INFO]: [PlotManager] Loading PlotManager v1.3.2
+[15:30:54] [Server thread/INFO]: [PlotMe] Loading PlotMe v0.16.3
+[15:30:54] [Server thread/INFO]: [WorldBorder] Loading WorldBorder v1.8.3
+[15:30:54] [Server thread/INFO]: [CreativeGates] Loading CreativeGates v2.7.5
+[15:30:54] [Server thread/INFO]: [LWC] Loading LWC v4.4.0 (b881) (July 11, 2013)
+[15:30:54] [Server thread/INFO]: [Factions] Loading Factions v2.7.5
+[15:30:54] [Server thread/INFO]: [DynmapPlotMe] Loading DynmapPlotMe v0.3
+[15:30:54] [Server thread/INFO]: [ChestShop] Loading ChestShop v3.8.7
+[15:30:54] [Server thread/INFO]: [PlotMe-DefaultGenerator] Loading PlotMe-DefaultGenerator v0.16.1
+[15:30:54] [Server thread/INFO]: [Dynmap-Factions] Loading Dynmap-Factions v0.90-39
+[15:30:54] [Server thread/INFO]: [FactionChat] Loading FactionChat v1.9.9
+[15:30:54] [Server thread/INFO]: [Multiverse-Core] Loading Multiverse-Core v2.5-b692
+[15:30:54] [Server thread/INFO]: [Multiverse-Portals] Loading Multiverse-Portals v2.5-bUNKNOWN
+[15:30:54] [Server thread/INFO]: [AreaShop] Loading AreaShop v2.1.5
+[15:30:54] [Server thread/INFO]: [HolographicDisplays] Loading HolographicDisplays v2.1.10
+[15:30:54] [Server thread/INFO]: [ProtocolLib] Enabling ProtocolLib v3.6.3-SNAPSHOT-b132
+[15:30:54] [Server thread/INFO]: [ProtocolLib] Started structure compiler thread.
+[15:30:54] [Server thread/INFO]: [mcMMO] Enabling mcMMO v1.5.00-b3547
+[15:30:54] [Server thread/INFO]: [mcMMO] HealthBar plugin found, mcMMO's healthbars are automatically disabled.
+[15:30:55] [Server thread/INFO]: [Vault] Enabling Vault v1.5.3-b37
+[15:30:55] [Server thread/INFO]: [Vault] [Economy] Essentials Economy found: Waiting
+[15:30:55] [Server thread/WARN]: iConomy - If you are using Flatfile storage be aware that versions 6, 7 and 8 have a CRITICAL bug which can wipe ALL iconomy data.
+[15:30:55] [Server thread/WARN]: if you're using Votifier, or any other plugin which handles economy data in a threaded manner your server is at risk!
+[15:30:55] [Server thread/WARN]: it is highly suggested to use SQL with iCo6 or to use an alternative economy plugin!
+[15:30:55] [Server thread/INFO]: [Vault] [Economy] iConomy 6 found: Waiting
+[15:30:55] [Server thread/INFO]: [Vault] [Permission] GroupManager found: Waiting
+[15:30:55] [Server thread/INFO]: [Vault] [Permission] SuperPermissions loaded as backup permission system.
+[15:30:55] [Server thread/INFO]: [Vault] [Chat] GroupManager found: Waiting
+[15:30:55] [Server thread/INFO]: [Vault] Enabled Version 1.5.3-b37
+[15:30:55] [Server thread/INFO]: [MassiveCore] Enabling MassiveCore v2.7.5
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] === ENABLE START ===
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] §eLoading Cachefile datas...
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] §eLoading Onlineplayer datas...
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] §eLoading Registry datas...
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] §eLoading Dbmojangapi datas...
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] §bPlayer Strings Found: §d0
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] §bPlayer Strings Cached: §d0
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] §bPlayer Strings Remaining: §d0
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] §eNow fetching the remaining players from Mojang API ...
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] §e ... done!
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] §eSaving Cachefile...
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] §eSetup of IdUtil took §d19§ems.
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] §aActivated §eintegration with §dVault
+[15:30:55] [Server thread/INFO]: [MassiveCore 2.7.5] === ENABLE §aCOMPLETE §e(Took §d115ms§e) ===
+[15:30:55] [Server thread/INFO]: [PlotMe] Enabling PlotMe v0.16.3
+[15:30:55] [Server thread/INFO]: [LWC] Enabling LWC v4.4.0 (b881) (July 11, 2013)
+[15:30:55] [Server thread/INFO]: [LWC] Connecting to SQLite
+[15:30:55] [Server thread/INFO]: [PlotMe-DefaultGenerator] Enabling PlotMe-DefaultGenerator v0.16.1
+[15:30:55] [Server thread/INFO]: [PlotMe-DefaultGenerator] PlotMe
+[15:30:55] [Server thread/INFO]: [PlotMe-DefaultGenerator] PlotMe-DefaultGenerator
+[15:30:55] [Server thread/INFO]: [PlotMe-DefaultGenerator] No old PlotMe configs to import.
+[15:30:55] [Server thread/INFO]: Preparing level "world"
+[15:30:55] [Server thread/INFO]: Preparing start region for level 0 (Seed: -3316397714489839279)
+[15:30:56] [Server thread/INFO]: Preparing start region for level 1 (Seed: 290694038)
+[15:30:56] [Server thread/INFO]: [cWorldManager] Enabling cWorldManager v0.0.1
+[15:30:56] [Server thread/INFO]: [multiInv] Enabling multiInv v0.0.1
+[15:30:56] [Server thread/INFO]: [multiInv] multiInv version 0.0.1 sucessfully loaded!
+[15:30:56] [Server thread/INFO]: [WorldEdit] Enabling WorldEdit v6.0;3342-78f975b9
+[15:30:57] [Server thread/INFO]: WEPIF: Using the Bukkit Permissions API.
+[15:30:57] [Server thread/WARN]: [WorldEdit] 
+**********************************************
+** This WorldEdit version does not fully support your version of Bukkit.
+**
+** When working with blocks or undoing, chests will be empty, signs
+** will be blank, and so on. There will be no support for entity
+** and biome-related functions.
+**
+** Please see http://wiki.sk89q.com/wiki/WorldEdit/Bukkit_adapters
+**********************************************
+
+[15:30:57] [Server thread/INFO]: [HealthBar] Enabling HealthBar v1.8.2
+[15:30:57] [Server thread/INFO]: [mcjobs] Enabling mcjobs v3.1.8
+[15:30:57] [Server thread/ERROR]: [mcjobs] Plugin mcjobs v3.1.8 has failed to register events for class com.dmgkz.mcjobs.listeners.McmmoRepairListener because com/gmail/nossr50/events/skills/McMMOPlayerRepairCheckEvent does not exist.
+[15:30:57] [Server thread/INFO]: [mcjobs] mcMMO has been found.
+[15:30:57] [Server thread/INFO]: [mcjobs] Using builtin logging methods.
+[15:30:57] [Server thread/INFO]: [mcjobs] WorldGuard found.  Enabling WorldGuard protections.
+[15:30:57] [Server thread/INFO]: [mcjobs] Found Vault 1.5.3-b37
+[15:30:57] [Server thread/INFO]: [mcjobs] LOADED JOBS: digger miner builder carpenter soldier tinkerer woodsman farmer toolmaker weaponsmith armorer fisherman baker alchemist brewer enchanter theurgist conjurer 
+[15:30:57] [Server thread/INFO]: [mcjobs] MC Jobs has been enabled!
+[15:30:57] [Server thread/INFO]: [Essentials] Enabling Essentials vTeamCity
+[15:30:57] [Server thread/INFO]: Bukkit version format changed. Version not checked.
+[15:30:57] [Server thread/INFO]: git-Bukkit-0a645a2 (MC: 1.8.3)
+[15:30:57] [Server thread/INFO]: 1.8.3-R0.1-SNAPSHOT
+[15:30:57] [Server thread/INFO]: Using locale en_US
+[15:30:57] [Server thread/INFO]: Using locale en_US
+[15:30:57] [Server thread/INFO]: [Vault][Economy] Essentials Economy hooked.
+[15:30:57] [Server thread/INFO]: Essentials: Using config file enhanced permissions.
+[15:30:57] [Server thread/INFO]: Permissions listed in as player-commands will be given to all users.
+[15:30:57] [Server thread/INFO]: [Essentials] Payment method found (Vault - Economy: iConomy  version: 1.5.3-b37)
+[15:30:57] [Server thread/INFO]: [GroupManager] Enabling GroupManager v2.0 (Phoenix)
+[15:30:57] [Server thread/WARN]: GroupManager - WARNING - Inherited group 'plotme.limit.2' not found for group moderator. Ignoring entry in file: plugins\GroupManager\worlds\world\groups.yml
+[15:30:57] [Server thread/WARN]: GroupManager - WARNING - Inherited group 'plotme.admin' not found for group admin. Ignoring entry in file: plugins\GroupManager\worlds\world\groups.yml
+[15:30:57] [Server thread/WARN]: GroupManager - WARNING - Inherited group 'backpack.edit' not found for group admin. Ignoring entry in file: plugins\GroupManager\worlds\world\groups.yml
+[15:30:57] [Server thread/WARN]: GroupManager - WARNING - Inherited group 'backpack.sign' not found for group admin. Ignoring entry in file: plugins\GroupManager\worlds\world\groups.yml
+[15:30:57] [Server thread/INFO]: GroupManager - INFO - World Found: world
+[15:30:57] [Server thread/INFO]: GroupManager - INFO - Superperms support enabled.
+[15:30:57] [Server thread/INFO]: GroupManager - INFO - Scheduled Data Saving is set for every 10 minutes!
+[15:30:57] [Server thread/INFO]: GroupManager - INFO - Backups will be retained for 24 hours!
+[15:30:57] [Server thread/INFO]: GroupManager version 2.0 (Phoenix) is enabled!
+[15:30:57] [Server thread/INFO]: WEPIF: GroupManager detected! Using GroupManager for permissions.
+[15:30:57] [Server thread/INFO]: [Vault][Permission] GroupManager hooked.
+[15:30:57] [Server thread/INFO]: [Vault][Chat] GroupManager - Chat hooked.
+[15:30:57] [Server thread/INFO]: Essentials: Using GroupManager based permissions.
+[15:30:57] [Server thread/INFO]: [PlugMan] Enabling PlugMan v2.0.4
+[15:30:57] [Server thread/INFO]: [Chairs] Enabling Chairs v4.6
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: WOOD_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: SPRUCE_WOOD_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: JUNGLE_WOOD_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: BIRCH_WOOD_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: SANDSTONE_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: COBBLESTONE_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: BRICK_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: SMOOTH_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: NETHER_BRICK_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: QUARTZ_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: ACACIA_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: DARK_OAK_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Chairs] Allowed block: RED_SANDSTONE_STAIRS => 0.7
+[15:30:57] [Server thread/INFO]: [Votifier] Enabling Votifier v1.9
+[15:30:57] [Server thread/INFO]: [Votifier] Votifier enabled.
+[15:30:57] [Server thread/INFO]: [WorldGuard] Enabling WorldGuard v5.9
+[15:30:57] [Server thread/INFO]: [WorldGuard] (world) TNT ignition is blocked.
+[15:30:57] [Server thread/INFO]: [WorldGuard] (world) Lighters are PERMITTED.
+[15:30:57] [Server thread/INFO]: [WorldGuard] (world) Lava fire is blocked.
+[15:30:57] [Server thread/INFO]: [WorldGuard] (world) All fire spread is disabled.
+[15:30:57] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'world'
+[15:30:57] [Server thread/INFO]: [WorldGuard] (world_the_end) TNT ignition is blocked.
+[15:30:57] [Server thread/INFO]: [WorldGuard] (world_the_end) Lighters are PERMITTED.
+[15:30:57] [Server thread/INFO]: [WorldGuard] (world_the_end) Lava fire is blocked.
+[15:30:57] [Server thread/INFO]: [WorldGuard] (world_the_end) All fire spread is disabled.
+[15:30:57] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'world_the_end'
+[15:30:57] [Server thread/INFO]: [WorldGuard] 25 regions loaded for 'world'
+[15:30:57] [Server thread/INFO]: [WorldGuard] 0 regions loaded for 'world_the_end'
+[15:30:57] [Server thread/INFO]: [betterMe] Enabling betterMe v1
+[15:30:57] [Server thread/INFO]: [dieRain] Enabling dieRain v0.0.1
+[15:30:57] [Server thread/INFO]: [dunce] Enabling dunce v1
+[15:30:57] [Server thread/INFO]: [EssentialsChat] Enabling EssentialsChat vTeamCity
+[15:30:57] [Server thread/INFO]: [jumpBoost] Enabling jumpBoost v1
+[15:30:57] [Server thread/INFO]: [iConomy] Enabling iConomy v7.0
+[15:30:57] [Server thread/INFO]: [iConomy - April Fools] Enabled (14 ms)
+[15:30:57] [Server thread/INFO]: [iConomy] Hello, I'm Nijikokun. Yes, this is an April Fools joke, but '/money top' was fixed! Enjoy :) - Rare Version!
+[15:30:57] [Server thread/INFO]: [Vault][Economy] iConomy 7 hooked.
+[15:30:57] [Thread-15/INFO]: [iConomy - April Fools] Purged accounts with default balance.
+[15:30:57] [Server thread/INFO]: [sirNeedsOp] Enabling sirNeedsOp v1
+[15:30:57] [Server thread/ERROR]: Error occurred while enabling sirNeedsOp v1 (Is it up to date?)
+java.lang.NullPointerException
+	at tk.masonx.sirNeedsOp.SirNeedsOp.onEnable(SirNeedsOp.java:13) ~[?:?]
+	at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:321) ~[custom.jar:git-Bukkit-0a645a2]
+	at org.bukkit.plugin.java.JavaPluginLoader.enablePlugin(JavaPluginLoader.java:327) [custom.jar:git-Bukkit-0a645a2]
+	at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManager.java:404) [custom.jar:git-Bukkit-0a645a2]
+	at org.bukkit.craftbukkit.v1_8_R2.CraftServer.loadPlugin(CraftServer.java:341) [custom.jar:git-Bukkit-0a645a2]
+	at org.bukkit.craftbukkit.v1_8_R2.CraftServer.enablePlugins(CraftServer.java:313) [custom.jar:git-Bukkit-0a645a2]
+	at net.minecraft.server.v1_8_R2.MinecraftServer.r(MinecraftServer.java:408) [custom.jar:git-Bukkit-0a645a2]
+	at net.minecraft.server.v1_8_R2.MinecraftServer.k(MinecraftServer.java:374) [custom.jar:git-Bukkit-0a645a2]
+	at net.minecraft.server.v1_8_R2.MinecraftServer.a(MinecraftServer.java:329) [custom.jar:git-Bukkit-0a645a2]
+	at net.minecraft.server.v1_8_R2.DedicatedServer.init(DedicatedServer.java:236) [custom.jar:git-Bukkit-0a645a2]
+	at net.minecraft.server.v1_8_R2.MinecraftServer.run(MinecraftServer.java:501) [custom.jar:git-Bukkit-0a645a2]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_45]
+[15:30:57] [Server thread/INFO]: [backpack] Enabling backpack v1.0.0
+[15:30:57] [Server thread/INFO]: [SimpleVoteListener] Enabling SimpleVoteListener v2.6
+[15:30:57] [Server thread/INFO]: [SimpleVoteListener] Config file found. Using it!
+[15:30:57] [Server thread/INFO]: [SimpleVoteListener] SimpleVoteListener 2.6 successfully enabled.
+[15:30:57] [Server thread/INFO]: [EssentialsSpawn] Enabling EssentialsSpawn vTeamCity
+[15:30:57] [Server thread/INFO]: [EnjinMinecraftPlugin] Enabling EnjinMinecraftPlugin v2.7.2
+[15:30:57] [Server thread/INFO]: [EnjinMinecraftPlugin] MC 1.3 or above found, enabling version 2 XP handling.
+[15:30:57] [Server thread/INFO]: [EnjinMinecraftPlugin] MC 1.7.2 or above found, enabling version 2 log handling.
+[15:30:57] [Server thread/INFO]: [EnjinMinecraftPlugin] MC 1.7.10 or above found, enabling version 2 player handling.
+[15:30:57] [Server thread/INFO]: [EnjinMinecraftPlugin] Couldn't find the TuxTwoLib plugin. Only able to give items to online players only.
+[15:30:57] [Server thread/ERROR]: [EnjinMinecraftPlugin] This version of GroupManager doesn't support UUID! Please update to the latest version here: http://tiny.cc/EssentialsGMZip
+[15:30:57] [Server thread/ERROR]: [EnjinMinecraftPlugin] Disabling GroupManager integration until GroupManager is updated.
+[15:30:57] [Server thread/INFO]: [Enjin Minecraft Plugin] Votifier plugin found, enabling Votifier support.
+[15:30:58] [Server thread/INFO]: [dynmap] Enabling dynmap v2.1-SNAPSHOT-1091
+[15:30:58] [Server thread/INFO]: [dynmap] Using GroupManager 2.0 (Phoenix) for access control
+[15:30:58] [Server thread/INFO]: [dynmap] Mod Support processing completed
+[15:30:58] [Server thread/INFO]: [dynmap] Loaded 23 shaders.
+[15:30:58] [Server thread/INFO]: [dynmap] Loaded 82 perspectives.
+[15:30:58] [Server thread/INFO]: [dynmap] Loaded 14 lightings.
+[15:30:59] [Server thread/INFO]: [dynmap] Web server started on address 167.114.137.137:8123
+[15:30:59] [Server thread/INFO]: [dynmap] version 2.1-SNAPSHOT-1091 is enabled - core version 2.1-SNAPSHOT-2032
+[15:30:59] [Server thread/INFO]: [dynmap] Loaded 3 maps of world 'world'.
+[15:30:59] [Server thread/INFO]: [dynmap] Loaded 2 maps of world 'world_the_end'.
+[15:30:59] [Server thread/INFO]: [dynmap] Enabled
+[15:30:59] [Server thread/INFO]: [PlotManager] Enabling PlotManager v1.3.2
+[15:30:59] [Server thread/INFO]: <<[ PlotManager ]>>  [ Version ]=[ 1.3.2 ] [ Successfully Loaded! ]
+[15:30:59] [Server thread/INFO]: [WorldBorder] Enabling WorldBorder v1.8.3
+[15:30:59] [Server thread/INFO]: [WorldBorder] [CONFIG] Using elliptic/round border, knockback of 3.0 blocks, and timer delay of 5.
+[15:30:59] [Server thread/INFO]: [WorldBorder] [CONFIG] Border-checking timed task started.
+[15:30:59] [Server thread/INFO]: [WorldBorder] [CONFIG] World "kale_forest" has border radius 10000 at X: -27.2 Z: -55.5
+[15:30:59] [Server thread/INFO]: [WorldBorder] [CONFIG] World "world" has border radius 300 at X: -224.6 Z: 149.4
+[15:30:59] [Server thread/INFO]: [WorldBorder] [CONFIG] World "galaran" has border radius 5000 at X: 0.0 Z: 0.0
+[15:30:59] [Server thread/INFO]: [WorldBorder] [CONFIG] World "Galaran" has border radius 5000 at X: 0.0 Z: 0.0
+[15:30:59] [Server thread/INFO]: [WorldBorder] [CONFIG] World "undermountain" has border radius 5000 at X: 8.5 Z: 8.5
+[15:30:59] [Server thread/INFO]: [WorldBorder] [CONFIG] Successfully hooked into DynMap for the ability to display borders.
+[15:30:59] [Server thread/INFO]: [WorldBorder] For reference, the main world's spawn location is at X: -238.0 Y: 79.0 Z: 263.0
+[15:31:00] [Server thread/INFO]: [CreativeGates] Enabling CreativeGates v2.7.5
+[15:31:00] [Server thread/INFO]: [CreativeGates 2.7.5] === ENABLE START ===
+[15:31:00] [Server thread/INFO]: [CreativeGates 2.7.5] === ENABLE COMPLETE (Took 54ms) ===
+[15:31:00] [Server thread/INFO]: [Factions] Enabling Factions v2.7.5
+[15:31:00] [Server thread/INFO]: [Factions 2.7.5] === ENABLE START ===
+[15:31:00] [Server thread/INFO]: [Factions 2.7.5] Activated integration with LWC
+[15:31:00] [Server thread/INFO]: [Factions 2.7.5] === ENABLE COMPLETE (Took 305ms) ===
+[15:31:00] [Server thread/INFO]: [DynmapPlotMe] Enabling DynmapPlotMe v0.3
+[15:31:00] [Server thread/INFO]: [DynmapPlotMe] [DynmapPlotMe] initializing
+[15:31:00] [Server thread/INFO]: [ChestShop] Enabling ChestShop v3.8.7
+[15:31:00] [Server thread/INFO]: [ChestShop] LWC version 4.4.0 (b881) (July 11, 2013) loaded.
+[15:31:00] [Server thread/INFO]: [ChestShop] Vault loaded! Found an economy plugin!
+[15:31:01] [Server thread/INFO]: [Dynmap-Factions] Enabling Dynmap-Factions v0.90-39
+[15:31:01] [Server thread/INFO]: [Dynmap-Factions] initializing
+[15:31:01] [Server thread/INFO]: [Dynmap-Factions] Dynmap does not have player-info-protected enabled - visibility-by-faction will have no effect
+[15:31:01] [Server thread/INFO]: [Dynmap-Factions] version 0.90-39 is activated
+[15:31:01] [Server thread/INFO]: [FactionChat] Enabling FactionChat v1.9.9
+[15:31:01] [Server thread/INFO]: [FactionChat] using Factions API of: nz.co.lolnet.james137137.FactionChat.FactionsAPI.FactionsAPI_2_7_0
+[15:31:01] [Server thread/INFO]: FactionChat: Version: 1.9.9 Enabled.
+[15:31:02] [Server thread/INFO]: [Multiverse-Core] Enabling Multiverse-Core v2.5-b692
+[15:31:02] [Server thread/INFO]: [Multiverse-Core] [AllPay] - Version 13.0 - hooked into iConomy 6 for Multiverse-Core v2.5-b692
+[15:31:03] [Server thread/INFO]: Preparing start region for level 2 (Seed: -4780739835368196803)
+[15:31:03] [Server thread/INFO]: [WorldGuard] (Galaran) TNT ignition is blocked.
+[15:31:03] [Server thread/INFO]: [WorldGuard] (Galaran) Lighters are PERMITTED.
+[15:31:03] [Server thread/INFO]: [WorldGuard] (Galaran) Lava fire is blocked.
+[15:31:03] [Server thread/INFO]: [WorldGuard] (Galaran) All fire spread is disabled.
+[15:31:03] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'Galaran'
+[15:31:04] [Server thread/INFO]: [dynmap] Loaded 3 maps of world 'Galaran'.
+[15:31:04] [Server thread/INFO]: [dynmap] Loaded 6358 pending tile renders for world 'Galaran'
+[15:31:04] [Server thread/INFO]: Preparing start region for level 3 (Seed: -4484623810361305511)
+[15:31:04] [Server thread/INFO]: [WorldGuard] (kale_forest) TNT ignition is blocked.
+[15:31:04] [Server thread/INFO]: [WorldGuard] (kale_forest) Lighters are PERMITTED.
+[15:31:04] [Server thread/INFO]: [WorldGuard] (kale_forest) Lava fire is blocked.
+[15:31:04] [Server thread/INFO]: [WorldGuard] (kale_forest) All fire spread is disabled.
+[15:31:04] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'kale_forest'
+[15:31:04] [Server thread/INFO]: [dynmap] Loaded 3 maps of world 'kale_forest'.
+[15:31:04] [Server thread/INFO]: [dynmap] Loaded 209 pending tile renders for world 'kale_forest'
+[15:31:05] [Server thread/INFO]: Preparing start region for level 4 (Seed: 6262516282263144905)
+[15:31:05] [Server thread/INFO]: [WorldGuard] (Creative) TNT ignition is blocked.
+[15:31:05] [Server thread/INFO]: [WorldGuard] (Creative) Lighters are PERMITTED.
+[15:31:05] [Server thread/INFO]: [WorldGuard] (Creative) Lava fire is blocked.
+[15:31:05] [Server thread/INFO]: [WorldGuard] (Creative) All fire spread is disabled.
+[15:31:05] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'Creative'
+[15:31:06] [Server thread/INFO]: [dynmap] Loaded 3 maps of world 'Creative'.
+[15:31:06] [Server thread/INFO]: Preparing start region for level 5 (Seed: 290694038)
+[15:31:06] [Server thread/INFO]: [WorldGuard] (world_nether) TNT ignition is blocked.
+[15:31:06] [Server thread/INFO]: [WorldGuard] (world_nether) Lighters are PERMITTED.
+[15:31:06] [Server thread/INFO]: [WorldGuard] (world_nether) Lava fire is blocked.
+[15:31:06] [Server thread/INFO]: [WorldGuard] (world_nether) All fire spread is disabled.
+[15:31:06] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'world_nether'
+[15:31:06] [Server thread/INFO]: [dynmap] Loaded 2 maps of world 'world_nether'.
+[15:31:06] [Server thread/INFO]: Preparing start region for level 6 (Seed: 2488773133180076262)
+[15:31:06] [Server thread/INFO]: [WorldGuard] (plotworld) TNT ignition is blocked.
+[15:31:06] [Server thread/INFO]: [WorldGuard] (plotworld) Lighters are PERMITTED.
+[15:31:06] [Server thread/INFO]: [WorldGuard] (plotworld) Lava fire is blocked.
+[15:31:06] [Server thread/INFO]: [WorldGuard] (plotworld) All fire spread is disabled.
+[15:31:06] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'plotworld'
+[15:31:07] [Server thread/INFO]: [dynmap] Loaded 3 maps of world 'plotworld'.
+[15:31:07] [Server thread/INFO]: [dynmap] Loaded 26 pending tile renders for world 'plotworld'
+[15:31:07] [Server thread/INFO]: Preparing start region for level 7 (Seed: -8403973305052148664)
+[15:31:07] [Server thread/INFO]: [WorldGuard] (Undermountain) TNT ignition is blocked.
+[15:31:07] [Server thread/INFO]: [WorldGuard] (Undermountain) Lighters are PERMITTED.
+[15:31:07] [Server thread/INFO]: [WorldGuard] (Undermountain) Lava fire is blocked.
+[15:31:07] [Server thread/INFO]: [WorldGuard] (Undermountain) All fire spread is disabled.
+[15:31:07] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'Undermountain'
+[15:31:08] [Server thread/INFO]: [dynmap] Loaded 2 maps of world 'Undermountain'.
+[15:31:08] [Server thread/INFO]: [Multiverse-Core] 8 - World(s) loaded.
+[15:31:08] [Server thread/INFO]: [Multiverse-Core] Version 2.5-b692 (API v18) Enabled - By Rigby, fernferret, lithium3141 and main--
+[15:31:08] [Server thread/INFO]: [Multiverse-Portals] Enabling Multiverse-Portals v2.5-bUNKNOWN
+[15:31:08] [Server thread/INFO]: [Multiverse-Portals] - Version 2.5-bUNKNOWN Enabled - By Rigby and fernferret
+[15:31:11] [Server thread/INFO]: [MVPLogging] 0 - Portals(s) loaded
+[15:31:11] [Server thread/INFO]: [Multiverse-Portals] Found WorldEdit, using it for selections.
+[15:31:11] [Server thread/INFO]: [AreaShop] Enabling AreaShop v2.1.5

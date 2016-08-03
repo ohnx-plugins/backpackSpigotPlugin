@@ -1,0 +1,7 @@
+name: backpack
+main: ca.masonx.backpack.BackPack
+version: 1.0.0
+commands:
+  bp:
+    description: Open a backpack.
+    usage: /bp
