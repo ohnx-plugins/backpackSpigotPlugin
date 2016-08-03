@@ -2,6 +2,8 @@ package ca.masonx.backpack;
 
 import java.io.File;
 
+import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ConfigHelper {
@@ -15,17 +17,36 @@ public class ConfigHelper {
             	// Save default config
             	parent.saveDefaultConfig();
             }
-            return loadConfig();
+            return loadConfig(parent);
         } catch (Exception e) {
         	return null;
         }
     }
     
-    private static ConfigSet loadConfig() {
-    	return new ConfigSet();
+    private static ConfigSet loadConfig(JavaPlugin parent) {
+    	FileConfiguration config = parent.getConfig();
+    	ConfigSet cfg = new ConfigSet();
+    	
+    	cfg.backpackName = config.getString("backpack-name");
+    	
+    	cfg.requireChestsInInv = config.getBoolean("require-chests-in-inv");
+    	cfg.noChestMsg = ChatColor.translateAlternateColorCodes('&', config.getString("no-chest-msg"));
+    	
+    	cfg.noPermsMsg = ChatColor.translateAlternateColorCodes('&', config.getString("no-perms-msg"));
+    	
+    	cfg.enableChestBackpack = config.getBoolean("enable-chest-backpack");
+    	
+    	return cfg;
     }
     
     protected static class ConfigSet {
+    	String backpackName;
     	
+    	boolean requireChestsInInv;
+    	String noChestMsg;
+    	
+    	String noPermsMsg;
+    	
+    	boolean enableChestBackpack;
     }
 }

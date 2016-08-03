@@ -1,5 +1,15 @@
-# triggers
-triggers:
-     - "create a faction": "Try running &a/f create <name>&r to create a faction."
-     - "where can build": "Try running &a/rtp&r to the wild, where you can build."
-     - "staff online now": "Try running &a/list&r to see the list of players online."
+# backpack v1.1.0 config
+
+backpack-name: "Backpack"
+
+# require a chest in the player's inventory in order to run the command ./bp
+require-chests-in-inv: true
+# no chest message - if `require-chests-in-inv` is true and the player doesn't have a chest named <backpack-name>
+# in their inventory, they will see this message.
+no-chest-msg: "&4You must carry a backpack on yourself to use it!"
+
+# no permissions to run ./bp (ie, no permission node `backpacks.use`)
+no-perms-msg: "&4You have not yet learned the art of backpacks!"
+
+# enable having a chest in the world named <backpack-name> will open the player's backpack
+enable-chest-backpack: true

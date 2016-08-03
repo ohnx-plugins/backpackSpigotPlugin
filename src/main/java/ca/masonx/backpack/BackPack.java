@@ -2,9 +2,7 @@ package ca.masonx.backpack;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 
 import ca.masonx.backpack.ConfigHelper.ConfigSet;
@@ -13,10 +11,10 @@ import com.evilmidget38.UUIDFetcher;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
 import org.bukkit.block.Sign;
@@ -27,16 +25,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public final class BackPack extends JavaPlugin implements Listener {
-	protected Map<String, Inventory> puEnabled = new HashMap<String, Inventory>();
-	protected BukkitRunnable saveTask;
 	private final BackPack moi = this;
 	private ConfigSet config;
 	
@@ -44,48 +39,61 @@ public final class BackPack extends JavaPlugin implements Listener {
     public void onEnable() {
 		new File(getDataFolder().toString()+"/backpacks").mkdirs();
     	this.getCommand("bp").setExecutor(this);
+    	this.getCommand("bpa").setExecutor(this);
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(this, this);
         
         config = ConfigHelper.assertConfig(this);
-        
-        saveTask = new BukkitRunnable () {
-        	public void run() {
-        		for (Entry<String, Inventory> en : puEnabled.entrySet()) {
-        			String name = moi.getDataFolder().toString()+"/backpacks/"+en.getKey()+".inv";
-            		try {
-            			InventoryIO.write(name, InventoryToBase64.toBase64(en.getValue()));
-            		} catch (Exception e) {
-            			moi.getLogger().severe("Failed to save a player's backpack to \""+name+"\"!");
-            			e.printStackTrace();
-            		}
-        		}
-        	}
-        };
-        saveTask.runTaskTimer(moi, 6000, 6000);
     }
  
     @Override
     public void onDisable() {
-    	for (Entry<String, Inventory> en : puEnabled.entrySet()) {
-			String name = moi.getDataFolder().toString()+"/backpacks/"+en.getKey()+".inv";
-    		try {
-    			InventoryIO.write(name, InventoryToBase64.toBase64(en.getValue()));
-    		} catch (Exception e) {
-    			moi.getLogger().severe("Failed to save a player's backpack to \""+name+"\"!");
-    			try {
-    				moi.getLogger().severe("This can serve as proof of what the player had in their backpack: " + InventoryToBase64.toBase64(en.getValue()));
-    			} catch (Exception f) {
-    				moi.getLogger().severe("Player has corrupted backpack!");
-    			}
-    			e.printStackTrace();
-    		}
-		}
     }
     
     public void openInv(Player p, Inventory inv){
     	p.playSound(p.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 0);
         p.openInventory(inv);
+    }
+    
+    protected boolean playerHasBackpack(Player p) {
+    	for (ItemStack is : p.getInventory().all(Material.CHEST).values()) {
+    		if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().equalsIgnoreCase(config.backpackName)) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    protected void openBackpack(Player p, String pUUID) {
+		boolean shouldNotOpen = true;
+		Inventory i = null;
+		if (pUUID == null) pUUID = p.getUniqueId().toString();
+		try {
+			if(!InventoryIO.nouveau(getDataFolder().toString()+"/backpacks/"+pUUID+".inv"))
+				i = InventoryToBase64.fromBase64(InventoryIO.read(getDataFolder().toString()+"/backpacks/"+pUUID+".inv"), "Backpack");
+			else
+				i = (Inventory) Bukkit.getServer().createInventory(null, 54, "Backpack");
+			shouldNotOpen = false;
+		} catch (Exception e) {
+			p.sendMessage(ChatColor.RED+"Error opening your backpack!");
+			moi.getLogger().severe("Failed to open a player's backpack from \""+getDataFolder().toString()+"/backpacks/"+pUUID+".inv"+"\"!");
+			e.printStackTrace();
+		}
+		if (!shouldNotOpen) openInv(p, i);
+    }
+    
+    protected void saveBackpack(String uuid, Inventory i, Player errMsgReceiver) {
+    	try {
+    		InventoryIO.write(getDataFolder().toString()+"/backpacks/"+uuid+".inv", InventoryToBase64.toBase64(i));
+    		i.clear();
+    		errMsgReceiver.playSound(errMsgReceiver.getLocation(), Sound.BLOCK_CHEST_CLOSE, 1, 0);
+    	} catch (Exception f) {
+    		errMsgReceiver.sendMessage("Uh oh... The inventory couldn't be saved. Placing items on ground.");
+    		for(ItemStack is : i.getContents()){
+    			errMsgReceiver.getWorld().dropItem(errMsgReceiver.getLocation(), is);
+    		}
+    	}
+    	
     }
     
 	@Override
@@ -97,76 +105,22 @@ public final class BackPack extends JavaPlugin implements Listener {
     				return true;
     			}
     			Player p = (Player) sender;
-				if(!p.hasPermission("backpack.self.open")) {
-					sender.sendMessage(ChatColor.RED+"You don't have the permission to open a backpack!");
+				if(!p.hasPermission("backpack.use")) {
+					sender.sendMessage(config.noPermsMsg);
 					return true;
 				}
-    			Inventory i;
+				if(config.requireChestsInInv && !p.hasPermission("backpack.use.no-chest") && !playerHasBackpack(p)) {
+					sender.sendMessage(config.noChestMsg);
+					return true;
+				}
 				if(args.length==0) {	//player was not specified, just use default one
-					String pUUID = p.getUniqueId().toString();
-					boolean shouldNotOpen = true;
-					i = null;
-					if(puEnabled.containsKey(pUUID)) {
-						try {
-							i = puEnabled.get(pUUID);
-							InventoryIO.write(getDataFolder().toString()+"/backpacks/"+pUUID+".inv", InventoryToBase64.toBase64(i));
-							shouldNotOpen = false;
-						} catch (Exception e) {
-							sender.sendMessage(ChatColor.RED+"Had difficulties saving your preexisting backpack!");
-							getLogger().severe("Error saving player backpack to \""+getDataFolder().toString()+"/backpacks/"+pUUID+".inv"+"\"!");
-							e.printStackTrace();
-						}
-					} else {
-						try {
-							if(!InventoryIO.nouveau(getDataFolder().toString()+"/backpacks/"+pUUID+".inv"))
-								i = InventoryToBase64.fromBase64(InventoryIO.read(getDataFolder().toString()+"/backpacks/"+pUUID+".inv"), "Backpack");
-							else
-								i = (Inventory) Bukkit.getServer().createInventory(null, 54, "Backpack");
-							shouldNotOpen = true;
-						} catch (Exception e) {
-							sender.sendMessage(ChatColor.RED+"Error opening your backpack!");
-							moi.getLogger().severe("Failed to open a player's backpack from \""+getDataFolder().toString()+"/backpacks/"+pUUID+".inv"+"\"!");
-	            			e.printStackTrace();
-						}
-					}
-					if (!shouldNotOpen) openInv(p, i);
+					openBackpack(p, null);
 					return true;
 				}
 				if((args.length==1)) {
-					if (args[0].equalsIgnoreCase("autofill")) {
-						if (!p.hasPermission("backpack.pickup")) {
-							sender.sendMessage(ChatColor.RED+"Whoops! You don't have the permission to do that.");
-						}
-						String pUUID = p.getUniqueId().toString();
-						if (puEnabled.containsKey(pUUID)) {
-							try {
-								InventoryIO.write(getDataFolder().toString()+"/backpacks/"+pUUID+".inv", InventoryToBase64.toBase64(puEnabled.get(pUUID)));
-								puEnabled.remove(pUUID);
-								sender.sendMessage(ChatColor.DARK_RED+"No longer automatically picking up items.");
-							} catch (Exception e) {
-								sender.sendMessage(ChatColor.RED+"Had difficulties saving your preexisting backpack!");
-								getLogger().severe("Error saving player backpack to \""+getDataFolder().toString()+"/backpacks/"+pUUID+".inv"+"\"!");
-								e.printStackTrace();
-							}
-						} else {
-							try {
-								if(!InventoryIO.nouveau(getDataFolder().toString()+"/backpacks/"+pUUID+".inv"))
-									i = InventoryToBase64.fromBase64(InventoryIO.read(getDataFolder().toString()+"/backpacks/"+pUUID+".inv"), "Backpack");
-								else
-									i = (Inventory) Bukkit.getServer().createInventory(null, 54, "Backpack");
-								puEnabled.put(pUUID, i);
-								sender.sendMessage(ChatColor.GREEN+"Now automatically picking up items!");
-							} catch (Exception e) {
-								sender.sendMessage(ChatColor.RED+"Error opening your backpack!");
-								moi.getLogger().severe("Failed to open a player's backpack from \""+getDataFolder().toString()+"/backpacks/"+pUUID+".inv"+"\"!");
-								sender.sendMessage(ChatColor.RED+"Error opening your backpack!");
-							}
-						}
-						return true;
-					}
 					final String pName = args[0];
-					final CommandSender cs = sender;
-					if(!p.hasPermission("backpack.others.open")) {
+					final Player pIn = (Player) sender;
+					if(!p.hasPermission("backpack.admin")) {
 						sender.sendMessage(ChatColor.RED+"You can't open another player's backpack!");
 	    				return true;
 					}
@@ -176,89 +130,72 @@ public final class BackPack extends JavaPlugin implements Listener {
 								UUIDFetcher fetcher = new UUIDFetcher(Arrays.asList(pName));
 								Map<String, UUID> response = null;
 								response = fetcher.call();
-				    			Player p = (Player) cs;
-				    			Inventory i;
-								if(!InventoryIO.nouveau(getDataFolder().toString()+"/backpacks/"+response.get(pName).toString()+".inv"))
-									i = InventoryToBase64.fromBase64(InventoryIO.read(getDataFolder().toString()+"/backpacks/"+response.get(pName).toString()+".inv"), pName+"'s backpack");
-								else
-									i = (Inventory) Bukkit.getServer().createInventory(null, 54,  pName+"'s backpack");
-								openInv(p, i);
+				    			openBackpack(pIn, response.get(pName).toString());
 							} catch (Exception e) {
-								cs.sendMessage(ChatColor.RED+"Error fetching UUID!");
+								pIn.sendMessage(ChatColor.RED+"Error fetching UUID!");
 							}
 						}
 					});
 					return true;
 				}
+    		} else if(cmd.getName().equalsIgnoreCase("bpa")) {
+    			if(!sender.hasPermission("backpack.admin")) {
+					sender.sendMessage(ChatColor.RED+"You don't have the permissions to administrate backpacks!");
+    				return true;
+				}
+    			if(args.length == 2 && args[0].equalsIgnoreCase("clear")) {
+    				final String pName = args[1];
+    				final CommandSender cs = sender;
+    				Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
+						public void run() {
+							try {
+								UUIDFetcher fetcher = new UUIDFetcher(Arrays.asList(pName));
+								Map<String, UUID> response = null;
+								response = fetcher.call();
+								File old = new File(getDataFolder().toString()+"/backpacks/"+response.get(pName).toString()+".inv");
+								File bck = new File(getDataFolder().toString()+"/backpacks/"+response.get(pName).toString()+".inv.bck");
+								if(old.exists()) {
+									if (bck.exists()) bck.delete();
+									old.renameTo(bck);
+									cs.sendMessage(ChatColor.GREEN + "Player backpack deleted!"+pName);
+									getLogger().info("A player backpack was just deleted. To restore, rename the file:");
+									getLogger().info(getDataFolder().toString()+"/backpacks/"+response.get(pName).toString()+".inv.bck");
+									getLogger().info("to the name:");
+									getLogger().info(getDataFolder().toString()+"/backpacks/"+response.get(pName).toString()+".inv");
+									getLogger().info("(ie, remove the `.bak` from the file extension`");
+								} else {
+									cs.sendMessage(ChatColor.YELLOW + "That player didn't have a backpack!");
+								}
+							} catch (Exception e) {
+								cs.sendMessage(ChatColor.RED+"Error fetching UUID!");
+							}
+						}
+					});
+    				return true;
+    			}
     		}
    	    } catch (Exception e) {
    	    	getLogger().warning("Something went wrong while parsing command from player "+sender.getName()+":");
    	    	e.printStackTrace();
-   	    	sender.sendMessage(ChatColor.RED+"Uhh, something went wrong.");
+   	    	sender.sendMessage(ChatColor.RED+"Oops! something went wrong.");
    	    }
     	return true; 
     }
 	@EventHandler
-	public void onInvInteract(InventoryInteractEvent e) {
-		Player p = (Player) e.getWhoClicked();
+	public void onInvClick(InventoryClickEvent e) {
+		if(e.getInventory() == null) return;
 		if((e.getInventory().getHolder() instanceof Chest)||(e.getInventory().getHolder() instanceof DoubleChest))
 			return;
-		if (e.getInventory().getName().contains("'s backpack")) {
-			if(!p.hasPermission("backpack.edit")) {
+		// prevent a player from putting their backpack into the backpack
+		
+		if(e.getInventory().getName().contains(config.backpackName)) {
+			ItemStack is = e.getCurrentItem();
+			if(is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().equalsIgnoreCase(config.backpackName)) {
 				e.setCancelled(true);
 			}
 		}
 	}
-	@EventHandler
-	public void closeInventory(InventoryCloseEvent e) {
-		final Inventory i = e.getInventory();
-		final Player p = (Player) e.getPlayer();
-		if((e.getInventory().getHolder() instanceof Chest)||(e.getInventory().getHolder() instanceof DoubleChest))
-			return;
-		if(p.hasPermission("backpack.edit")) {
-			if (i.getName().contains("'s backpack")) {
-				final String pName = i.getName().split("'")[0];
-				Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
-					public void run() {
-						try {
-							UUIDFetcher fetcher = new UUIDFetcher(Arrays.asList(pName));
-							Map<String, UUID> response = null;
-							response = fetcher.call();
-			    			try {
-			    				InventoryIO.write(getDataFolder().toString()+"/backpacks/"+response.get(pName)+".inv", InventoryToBase64.toBase64(i));
-			    				p.playSound(p.getLocation(), Sound.BLOCK_CHEST_CLOSE, 1, 0);
-			    				i.clear();
-			    			} catch (Exception e) {
-			    	    		p.sendMessage("Uh oh... The inventory couldn't be saved. Placing items on ground.");
-			    	    		for(ItemStack is : i.getContents()){
-			    	    			p.getWorld().dropItem(p.getLocation(), is);
-			    	    		}
-			    			}
-						} catch (Exception e) {
-							p.sendMessage("Error fetching UUID!");
-						}
-					}
-				});
-				
-			}
-		}
-		if(!i.getName().equals("Backpack"))
-			return;
-		//Is backpack!
-		if(i.getSize()!=54)
-			return;
-		//that isn't the correct inventory size...
-    	try {
-    		InventoryIO.write(getDataFolder().toString()+"/backpacks/"+p.getUniqueId().toString()+".inv", InventoryToBase64.toBase64(i));
-    		i.clear();
-    		p.playSound(p.getLocation(), Sound.BLOCK_CHEST_CLOSE, 1, 0);
-    	} catch (Exception f) {
-    		p.sendMessage("Uh oh... The inventory couldn't be saved. Placing items on ground.");
-    		for(ItemStack is : i.getContents()){
-    			p.getWorld().dropItem(p.getLocation(), is);
-    		}
-    	}
-	}
+	
 	@EventHandler
     public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
@@ -266,31 +203,29 @@ public final class BackPack extends JavaPlugin implements Listener {
             if (e.getClickedBlock().getState() instanceof Sign) {
                 Sign s = (Sign) e.getClickedBlock().getState();
                 if(s.getLine(0).contains("[Backpack]")){
-    				if(!p.hasPermission("backpack.open.self")&&!s.getLine(1).contains("Everyone")) {
+    				if(!p.hasPermission("backpack.use")&&!s.getLine(1).contains("Everyone")) {
     					p.sendMessage("You don't have the permission to open a backpack!");
     					return;
     				}
-        			Inventory i;
-        			try {
-        				if(!InventoryIO.nouveau(getDataFolder().toString()+"/backpacks/"+p.getUniqueId().toString()+".inv"))
-        					i = InventoryToBase64.fromBase64(InventoryIO.read(getDataFolder().toString()+"/backpacks/"+p.getUniqueId().toString()+".inv"), "Backpack");
-        				else
-        					i = (Inventory) Bukkit.getServer().createInventory(null, 54, "Backpack");
-        				openInv(p, i);
-        			} catch (Exception erreur) {
-        				p.sendMessage("There was an error opening your backpack!");
-        			}
+    				openBackpack(p, null);
         			return;
                 }
+            } else if (config.enableChestBackpack && e.getClickedBlock().getState() instanceof Chest) {
+            	Chest c = (Chest) e.getClickedBlock().getState();
+            	if (c.getBlockInventory().getName().equalsIgnoreCase("Backpack")) {
+            		e.setCancelled(true);
+            		openBackpack(p, null);
+            	}
             }
         }
     }
+	
 	@EventHandler
 	public void onSignChange(SignChangeEvent e) {
         Player p = e.getPlayer();
         if(e.getLine(0).equals("[Backpack]")){
-        	if(p.hasPermission("backpack.sign")){
-        		if(e.getLine(1).equals("Everyone")) {
+        	if(p.hasPermission("backpack.admin.sign")){
+        		if(e.getLine(1).equalsIgnoreCase("Everyone")) {
         			e.setLine(1, ChatColor.GREEN+"Everyone");
         		}
         		p.sendMessage("New backpack sign created!");
@@ -300,5 +235,40 @@ public final class BackPack extends JavaPlugin implements Listener {
            		e.setCancelled(true);
         	}
         }
+	}
+	
+	@EventHandler
+	public void closeInventory(InventoryCloseEvent e) {
+		final Inventory i = e.getInventory();
+		final Player p = (Player) e.getPlayer();
+		if((e.getInventory().getHolder() instanceof Chest)||(e.getInventory().getHolder() instanceof DoubleChest))
+			return;
+		
+		if(!i.getName().equals(config.backpackName))
+			return;
+		
+		if(i.getSize()!=54)
+			return;
+		
+		if(p.hasPermission("backpack.admin")) {
+			if (i.getName().contains("'s backpack")) {
+				final String pName = i.getName().split("'")[0];
+				Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
+					public void run() {
+						try {
+							UUIDFetcher fetcher = new UUIDFetcher(Arrays.asList(pName));
+							Map<String, UUID> response = null;
+							response = fetcher.call();
+							saveBackpack(response.get(pName).toString(), i, p);
+						} catch (Exception e) {
+							p.sendMessage("Error fetching UUID!");
+						}
+					}
+				});
+				return;
+			}
+		}
+		
+		saveBackpack(p.getUniqueId().toString(), i, p);
 	}
 }

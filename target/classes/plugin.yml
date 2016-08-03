@@ -1,7 +1,10 @@
 name: backpack
 main: ca.masonx.backpack.BackPack
-version: 1.0.0
+version: 1.1.0
 commands:
   bp:
     description: Open a backpack.
     usage: /bp
+  bpa:
+    description: Administrate backpacks.
+    usage: /bpa
