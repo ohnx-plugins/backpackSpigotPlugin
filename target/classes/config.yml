@@ -11,10 +11,10 @@ no-chest-msg: "&cYou must carry a backpack on yourself to use it!"
 # no permissions to run ./bp (ie, no permission node `backpacks.use`)
 no-perms-msg: "&cYou have not yet learned the art of backpacks!"
 # no permissions to administrate error message
-generic-admin-err: "&cYou do not have the permissions to admininstrate backpacks!"
+generic-perms-err: "&cYou do not have the permissions to do this!"
 
 # enable having a chest in the world named <backpack-name> will open the player's backpack
 enable-chest-backpack: false
 
 # enable having signs to open a player's backpack
-enable-sign-backpack: true
+enable-sign-backpack: false

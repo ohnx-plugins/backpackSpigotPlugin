@@ -64,15 +64,22 @@ public final class BackPack extends JavaPlugin implements Listener {
     	return false;
     }
     
-    protected void openBackpack(Player p, String pUUID) {
+    protected void openBackpack(Player p, String pUUID, String pName) {
 		boolean shouldNotOpen = true;
 		Inventory i = null;
-		if (pUUID == null) pUUID = p.getUniqueId().toString();
+		String backpackName;
+		if (pUUID == null) {
+			pUUID = p.getUniqueId().toString();
+			backpackName = config.backpackName;
+		} else {
+			backpackName = pName + "'s backpack";
+		}
+		
 		try {
 			if(!InventoryIO.nouveau(getDataFolder().toString()+"/backpacks/"+pUUID+".inv"))
-				i = InventoryToBase64.fromBase64(InventoryIO.read(getDataFolder().toString()+"/backpacks/"+pUUID+".inv"), "Backpack");
+				i = InventoryToBase64.fromBase64(InventoryIO.read(getDataFolder().toString()+"/backpacks/"+pUUID+".inv"), backpackName);
 			else
-				i = (Inventory) Bukkit.getServer().createInventory(null, 54, "Backpack");
+				i = (Inventory) Bukkit.getServer().createInventory(null, 54, config.backpackName);
 			shouldNotOpen = false;
 		} catch (Exception e) {
 			p.sendMessage(ChatColor.RED+"Error opening your backpack!");
@@ -86,7 +93,6 @@ public final class BackPack extends JavaPlugin implements Listener {
     	try {
     		InventoryIO.write(getDataFolder().toString()+"/backpacks/"+uuid+".inv", InventoryToBase64.toBase64(i));
     		i.clear();
-    		errMsgReceiver.playSound(errMsgReceiver.getLocation(), Sound.BLOCK_CHEST_CLOSE, 1, 0);
     	} catch (Exception f) {
     		errMsgReceiver.sendMessage("Uh oh... The inventory couldn't be saved. Placing items on ground.");
     		for(ItemStack is : i.getContents()){
@@ -114,7 +120,7 @@ public final class BackPack extends JavaPlugin implements Listener {
 					return true;
 				}
 				if(args.length==0) {	//player was not specified, just use default one
-					openBackpack(p, null);
+					openBackpack(p, null, null);
 					return true;
 				}
 				if((args.length==1)) {
@@ -130,7 +136,7 @@ public final class BackPack extends JavaPlugin implements Listener {
 								UUIDFetcher fetcher = new UUIDFetcher(Arrays.asList(pName));
 								Map<String, UUID> response = null;
 								response = fetcher.call();
-				    			openBackpack(pIn, response.get(pName).toString());
+				    			openBackpack(pIn, response.get(pName).toString(), pName);
 							} catch (Exception e) {
 								pIn.sendMessage(ChatColor.RED+"Error fetching UUID!");
 							}
@@ -177,6 +183,7 @@ public final class BackPack extends JavaPlugin implements Listener {
     					sender.sendMessage(config.genericPermsErr);
         				return true;
     				}
+    				reloadConfig();
     				config = ConfigHelper.assertConfig(this);
     				sender.sendMessage(ChatColor.GREEN + "Config reloaded!");
     			} else {
@@ -217,14 +224,14 @@ public final class BackPack extends JavaPlugin implements Listener {
     					p.sendMessage(config.noPermsMsg);
     					return;
     				}
-    				openBackpack(p, null);
+    				openBackpack(p, null, null);
         			return;
                 }
             } else if (e.getClickedBlock().getState() instanceof Chest && config.enableChestBackpack && p.hasPermission("backpack.use")) {
             	Chest c = (Chest) e.getClickedBlock().getState();
-            	if (c.getBlockInventory().getName().equalsIgnoreCase("Backpack")) {
+            	if (c.getBlockInventory().getName().equalsIgnoreCase(config.backpackName)) {
             		e.setCancelled(true);
-            		openBackpack(p, null);
+            		openBackpack(p, null, null);
             	}
             }
         }
@@ -275,6 +282,7 @@ public final class BackPack extends JavaPlugin implements Listener {
 							Map<String, UUID> response = null;
 							response = fetcher.call();
 							saveBackpack(response.get(pName).toString(), i, p);
+							p.playSound(p.getLocation(), Sound.BLOCK_CHEST_CLOSE, 1, 0);
 						} catch (Exception e) {
 							p.sendMessage("Error fetching UUID!");
 						}
@@ -285,5 +293,6 @@ public final class BackPack extends JavaPlugin implements Listener {
 		}
 		
 		saveBackpack(p.getUniqueId().toString(), i, p);
+		p.playSound(p.getLocation(), Sound.BLOCK_CHEST_CLOSE, 1, 0);
 	}
 }
