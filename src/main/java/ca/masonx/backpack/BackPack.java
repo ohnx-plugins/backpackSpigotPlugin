@@ -121,7 +121,7 @@ public final class BackPack extends JavaPlugin implements Listener {
 					final String pName = args[0];
 					final Player pIn = (Player) sender;
 					if(!p.hasPermission("backpack.admin")) {
-						sender.sendMessage(ChatColor.RED+"You can't open another player's backpack!");
+						sender.sendMessage(config.genericPermsErr);
 	    				return true;
 					}
 					Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
@@ -139,8 +139,8 @@ public final class BackPack extends JavaPlugin implements Listener {
 					return true;
 				}
     		} else if(cmd.getName().equalsIgnoreCase("bpa")) {
-    			if(!sender.hasPermission("backpack.admin")) {
-					sender.sendMessage(ChatColor.RED+"You don't have the permissions to administrate backpacks!");
+    			if(!sender.hasPermission("backpack.admin.clear")) {
+					sender.sendMessage(config.genericPermsErr);
     				return true;
 				}
     			if(args.length == 2 && args[0].equalsIgnoreCase("clear")) {
@@ -157,7 +157,7 @@ public final class BackPack extends JavaPlugin implements Listener {
 								if(old.exists()) {
 									if (bck.exists()) bck.delete();
 									old.renameTo(bck);
-									cs.sendMessage(ChatColor.GREEN + "Player backpack deleted!"+pName);
+									cs.sendMessage(ChatColor.GREEN + "Player "+pName+"'s backpack deleted!");
 									getLogger().info("A player backpack was just deleted. To restore, rename the file:");
 									getLogger().info(getDataFolder().toString()+"/backpacks/"+response.get(pName).toString()+".inv.bck");
 									getLogger().info("to the name:");
@@ -172,7 +172,17 @@ public final class BackPack extends JavaPlugin implements Listener {
 						}
 					});
     				return true;
+    			} else if(args.length == 1 && args[0].equalsIgnoreCase("reloadconfig")) {
+    				if(!sender.hasPermission("backpack.admin")) {
+    					sender.sendMessage(config.genericPermsErr);
+        				return true;
+    				}
+    				config = ConfigHelper.assertConfig(this);
+    				sender.sendMessage(ChatColor.GREEN + "Config reloaded!");
+    			} else {
+    				sender.sendMessage(ChatColor.RED + "Unrecognized command.");
     			}
+    			return true;
     		}
    	    } catch (Exception e) {
    	    	getLogger().warning("Something went wrong while parsing command from player "+sender.getName()+":");
@@ -181,15 +191,15 @@ public final class BackPack extends JavaPlugin implements Listener {
    	    }
     	return true; 
     }
+	
 	@EventHandler
 	public void onInvClick(InventoryClickEvent e) {
-		if(e.getInventory() == null) return;
-		if((e.getInventory().getHolder() instanceof Chest)||(e.getInventory().getHolder() instanceof DoubleChest))
-			return;
-		// prevent a player from putting their backpack into the backpack
+		if((e.getInventory().getHolder() instanceof Chest)||(e.getInventory().getHolder() instanceof DoubleChest)) return;
 		
+		// prevent a player from putting their backpack into the backpack
 		if(e.getInventory().getName().contains(config.backpackName)) {
 			ItemStack is = e.getCurrentItem();
+			if (is == null) return;
 			if(is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().equalsIgnoreCase(config.backpackName)) {
 				e.setCancelled(true);
 			}
@@ -200,17 +210,17 @@ public final class BackPack extends JavaPlugin implements Listener {
     public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK){
-            if (e.getClickedBlock().getState() instanceof Sign) {
+            if (e.getClickedBlock().getState() instanceof Sign && config.enableSignBackpack) {
                 Sign s = (Sign) e.getClickedBlock().getState();
                 if(s.getLine(0).contains("[Backpack]")){
     				if(!p.hasPermission("backpack.use")&&!s.getLine(1).contains("Everyone")) {
-    					p.sendMessage("You don't have the permission to open a backpack!");
+    					p.sendMessage(config.noPermsMsg);
     					return;
     				}
     				openBackpack(p, null);
         			return;
                 }
-            } else if (config.enableChestBackpack && e.getClickedBlock().getState() instanceof Chest) {
+            } else if (e.getClickedBlock().getState() instanceof Chest && config.enableChestBackpack && p.hasPermission("backpack.use")) {
             	Chest c = (Chest) e.getClickedBlock().getState();
             	if (c.getBlockInventory().getName().equalsIgnoreCase("Backpack")) {
             		e.setCancelled(true);
@@ -223,15 +233,20 @@ public final class BackPack extends JavaPlugin implements Listener {
 	@EventHandler
 	public void onSignChange(SignChangeEvent e) {
         Player p = e.getPlayer();
-        if(e.getLine(0).equals("[Backpack]")){
-        	if(p.hasPermission("backpack.admin.sign")){
+        if(e.getLine(0).equals("[Backpack]")) {
+        	if(p.hasPermission("backpack.admin.sign")) {
         		if(e.getLine(1).equalsIgnoreCase("Everyone")) {
         			e.setLine(1, ChatColor.GREEN+"Everyone");
         		}
-        		p.sendMessage("New backpack sign created!");
-        		e.setLine(0, ChatColor.DARK_BLUE+"[Backpack]");
+        		if(config.enableSignBackpack) {
+        			p.sendMessage("New backpack sign created!");
+            		e.setLine(0, ChatColor.DARK_BLUE+"[Backpack]");
+        		} else {
+        			p.sendMessage("Backpack signs are disabled.");
+        			e.setCancelled(true);
+        		}
         	} else {
-           		p.sendMessage("You don't have the permission to do that!");
+           		p.sendMessage(config.genericPermsErr);
            		e.setCancelled(true);
         	}
         }

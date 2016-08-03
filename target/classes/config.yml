@@ -3,13 +3,18 @@
 backpack-name: "Backpack"
 
 # require a chest in the player's inventory in order to run the command ./bp
-require-chests-in-inv: true
+require-chests-in-inv: false
 # no chest message - if `require-chests-in-inv` is true and the player doesn't have a chest named <backpack-name>
 # in their inventory, they will see this message.
-no-chest-msg: "&4You must carry a backpack on yourself to use it!"
+no-chest-msg: "&cYou must carry a backpack on yourself to use it!"
 
 # no permissions to run ./bp (ie, no permission node `backpacks.use`)
-no-perms-msg: "&4You have not yet learned the art of backpacks!"
+no-perms-msg: "&cYou have not yet learned the art of backpacks!"
+# no permissions to administrate error message
+generic-admin-err: "&cYou do not have the permissions to admininstrate backpacks!"
 
 # enable having a chest in the world named <backpack-name> will open the player's backpack
-enable-chest-backpack: true
+enable-chest-backpack: false
+
+# enable having signs to open a player's backpack
+enable-sign-backpack: true
